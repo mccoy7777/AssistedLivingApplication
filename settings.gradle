@@ -1,0 +1,2 @@
+rootProject.name='AssistedLivingApplication'
+include ':app'
