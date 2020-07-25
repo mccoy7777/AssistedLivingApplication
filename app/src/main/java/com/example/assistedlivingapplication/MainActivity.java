@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    //Update application
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
