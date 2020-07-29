@@ -35,4 +35,10 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }//End of logout method
 
+    //Create method to switch to panic button screen
+    public void panicButton (View view){
+        startActivity(new Intent(getApplicationContext(), PanicButton.class));
+        finish();
+    }//end of panicButton method
+
 }//End of Main class
