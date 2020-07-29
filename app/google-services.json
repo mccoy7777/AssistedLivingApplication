@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "170096415532",
+    "firebase_url": "https://assistedlivingapplication.firebaseio.com",
+    "project_id": "assistedlivingapplication",
+    "storage_bucket": "assistedlivingapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170096415532:android:e8863972bcf4e81ab0d289",
+        "android_client_info": {
+          "package_name": "com.example.assistedlivingapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170096415532-25m2kq16iuf01kq9nh0pq1v5fa5oj6hd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.assistedlivingapplication",
+            "certificate_hash": "7d3617c0125f727279f20fa551c89f98fd413684"
+          }
+        },
+        {
+          "client_id": "170096415532-8afgsm8binctkgqotbiqvel51afmpnfu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADn2dycR5uhLgSOf1O7oqHJBMXuG23-Qc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170096415532-8afgsm8binctkgqotbiqvel51afmpnfu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
