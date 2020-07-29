@@ -90,6 +90,7 @@ public class Register extends AppCompatActivity {
                         }//if statement to show user that they have successfully created their profile
                         else {
                             Toast.makeText(Register.this, "Error!! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }//else statement to show user if there is an error when creating their profile
 
                     }//end of OnComplete method
@@ -99,6 +100,15 @@ public class Register extends AppCompatActivity {
             }//End of OnClick method
 
         });//End of OnClickListener
+
+        //Create onClickListener for login textview
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Login.class));
+            }//end of OnClick method
+
+        });//End of onClickListener method
 
 
     }//End of OnCreate Method
