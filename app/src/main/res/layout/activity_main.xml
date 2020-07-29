@@ -49,7 +49,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="24dp"
         android:gravity="left"
-        android:text="Your Profile"
+        android:text="My Profile"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -115,5 +115,16 @@
         android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
+
+    <Button
+        android:id="@+id/btn_changepassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Change Password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
