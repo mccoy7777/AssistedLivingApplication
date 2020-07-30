@@ -30,101 +30,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <Button
+        android:id="@+id/btn_viewprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="55dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginBottom="99dp"
+        android:onClick="userProfile"
+        android:text="View My Profile"
+        app:layout_constraintBottom_toTopOf="@+id/btn_changepassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_profile"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
-        android:gravity="left"
-        android:text="My Profile"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="20dp"
-        android:gravity="left"
-        android:text="Your Name"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_profile" />
-
-    <TextView
-        android:id="@+id/tv_email"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:gravity="left"
-        android:text="Your Email Address"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
-    <TextView
-        android:id="@+id/tv_phone"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:gravity="left"
-        android:text="Your Phone Number"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
-
-    <TextView
-        android:id="@+id/tv_age"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:gravity="left"
-        android:text="Your Age"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
-
-    <Button
-        android:id="@+id/btn_changepassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Change Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
