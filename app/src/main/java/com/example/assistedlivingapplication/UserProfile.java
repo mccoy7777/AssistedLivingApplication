@@ -158,10 +158,10 @@ public class UserProfile extends AppCompatActivity {
                 Intent i = new Intent(view.getContext(), UpdateProfile.class);
 
                 //Use putExtra method to pass data from one activity to another through an Intent
-                i.putExtra("Name", "Shaun McLaughlin");
-                i.putExtra("Email", "mclaughlin-s5@hotmail.com");
-                i.putExtra("Phone", "0778767887");
-                i.putExtra("Age", "33");
+                i.putExtra("Name", name.getText().toString());
+                i.putExtra("Email", email.getText().toString());
+                i.putExtra("Phone", phone.getText().toString());
+                i.putExtra("Age", dob.getText().toString());
 
                 startActivity(i);
                 //Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
