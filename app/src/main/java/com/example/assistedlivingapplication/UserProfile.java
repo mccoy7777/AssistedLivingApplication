@@ -154,9 +154,19 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //open phone gallery using Intent
-                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                //Create Intent to switch to Update Profile activity when button is clicked
+                Intent i = new Intent(view.getContext(), UpdateProfile.class);
 
-                startActivityForResult(openGalleryIntent, 1000);
+                //Use putExtra method to pass data from one activity to another through an Intent
+                i.putExtra("Name", "Shaun McLaughlin");
+                i.putExtra("Email", "mclaughlin-s5@hotmail.com");
+                i.putExtra("Phone", "0778767887");
+                i.putExtra("Age", "33");
+
+                startActivity(i);
+                //Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                //startActivityForResult(openGalleryIntent, 1000);
             }//end of onClick method
 
         });//end of onClickListener method
