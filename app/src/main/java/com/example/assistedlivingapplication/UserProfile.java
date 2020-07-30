@@ -4,11 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +34,9 @@ public class UserProfile extends AppCompatActivity {
     //Declare variables
     TextView name, email, phone, dob;
 
-    Button changePassword;
+    ImageView profileImage;
+
+    Button changePassword, updateProfile;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userId;
@@ -46,6 +53,10 @@ public class UserProfile extends AppCompatActivity {
         email = findViewById(R.id.tv_email);
         phone = findViewById(R.id.tv_phone);
         dob = findViewById(R.id.tv_age);
+
+        updateProfile = findViewById(R.id.btn_updateprofile);
+
+        profileImage = findViewById(R.id.iv_profileimage);
 
         changePassword = findViewById(R.id.btn_changepassword);
 
@@ -119,6 +130,32 @@ public class UserProfile extends AppCompatActivity {
 
         });//end of onClickListener method
 
+        //Setup onClickListener for update profile button
+        updateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open phone gallery using Intent
+                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(openGalleryIntent, 1000);
+            }//end of onClick method
+
+        });//end of onClickListener method
+
     }//end of OnCreate method
+
+    //Create method that uses Android library to get requestCode, resultCode and use CONTENT_URI as above as data parameter
+    protected void onActivityResult (int requestCode, int resultCode, @androidx.annotation.Nullable Intent data){
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000){
+            if(resultCode == Activity.RESULT_OK){
+                Uri imageUri = data.getData();
+                profileImage.setImageURI(imageUri);
+            }//nested if statement to check if resultCode is ok
+
+        }//if statement to check if requestCode = the request code set by myself as above
+
+    }//end of onActivityResult method
 
 }//end of UserProfile class

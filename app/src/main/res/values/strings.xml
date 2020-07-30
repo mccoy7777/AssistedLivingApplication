@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AssistedLivingApplication</string>
+    <string name="person_icon">Person Icon</string>
 </resources>
