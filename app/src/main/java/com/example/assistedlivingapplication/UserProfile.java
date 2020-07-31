@@ -164,57 +164,14 @@ public class UserProfile extends AppCompatActivity {
                 i.putExtra("Age", dob.getText().toString());
 
                 startActivity(i);
-                //Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                //startActivityForResult(openGalleryIntent, 1000);
             }//end of onClick method
 
         });//end of onClickListener method
 
     }//end of OnCreate method
 
-    //Create method that uses Android library to get requestCode, resultCode and use CONTENT_URI as above as data parameter
-    @Override
-    protected void onActivityResult (int requestCode, int resultCode, @androidx.annotation.Nullable Intent data){
 
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1000){
-            if(resultCode == Activity.RESULT_OK){
-                Uri imageUri = data.getData();
-                profileImage.setImageURI(imageUri);
 
-                uploadImageToFirebase(imageUri);
-
-            }//nested if statement to check if resultCode is ok
-
-        }//if statement to check if requestCode = the request code set by myself as above
-
-    }//end of onActivityResult method
-
-    //Create private method to upload image from gallery to firebase storage
-    private void uploadImageToFirebase (Uri imageUri) {
-
-        final StorageReference fileRef = storageReference.child("users/" + userId + "/profile.jpg");
-        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-               fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                   @Override
-                   public void onSuccess(Uri uri) {
-                       Picasso.get().load(uri).into(profileImage);
-                   }//end of nested onSuccess method
-               });
-
-            }//end of onSuccess method
-
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UserProfile.this, "Failed", Toast.LENGTH_SHORT).show();
-            }//end of onFailure method
-
-        });//end of onSuccess Listener
-
-    }//end of uploadImageToFirebase method
 
 }//end of UserProfile class
