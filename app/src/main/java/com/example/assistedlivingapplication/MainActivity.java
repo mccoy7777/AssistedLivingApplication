@@ -78,8 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
             break;
             default: break;
-        }
-    }
+        }//end of switch statement
+
+    }//end of onClick method
 
     //Create method that allows user to logout of application
     public void logout (View view){
@@ -87,19 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }//End of logout method
-
-    //Create method to switch to panic button screen
-    public void panicButton (View view){
-        startActivity(new Intent(getApplicationContext(), PanicButton.class));
-        finish();
-    }//end of panicButton method
-
-    //Create method to switch to user profile screen
-    public void userProfile (View view){
-        startActivity(new Intent(getApplicationContext(), UserProfile.class));
-        finish();
-    }//end of panicButton method
-
 
 
 }//End of Main class

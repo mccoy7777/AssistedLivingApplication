@@ -11,7 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DailyTasks"></activity>
+        <activity android:name=".SundayTasks"></activity>
+        <activity android:name=".SaturdayTasks" />
+        <activity android:name=".FridayTasks" />
+        <activity android:name=".ThursdayTasks" />
+        <activity android:name=".WednesdayTasks" />
+        <activity android:name=".TuesdayTasks" />
+        <activity android:name=".MondayTasks" />
+        <activity android:name=".CreateNewDailyTask" />
+        <activity android:name=".DailyTasks" />
         <activity android:name=".PrescriptionService" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".UserProfile" />
