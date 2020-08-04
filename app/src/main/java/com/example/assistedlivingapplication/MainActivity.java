@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Declare variables
-    private CardView myProfile, dailyTasks, prescriptionService, panicButton;
+    private CardView myProfile, dailyTasks, prescriptionService, panicButton, dailyNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +50,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dailyTasks = (CardView) findViewById(R.id.daily_tasks);
         prescriptionService = (CardView) findViewById(R.id.prescription_service);
         panicButton = (CardView) findViewById(R.id.panic_button);
+        dailyNotification = (CardView) findViewById(R.id.daily_notification);
 
         //Add Click Listener to each CardView
         myProfile.setOnClickListener(this);
         dailyTasks.setOnClickListener(this);
         prescriptionService.setOnClickListener(this);
         panicButton.setOnClickListener(this);
+        dailyNotification.setOnClickListener(this);
 
 
     }//End of OnCreate Method
@@ -77,17 +79,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.panic_button : i = new Intent (this, PanicButton.class);
             startActivity(i);
             break;
+            case R.id.daily_notification : i = new Intent (this, DailyNotification.class);
+            startActivity(i);
+            break;
             default: break;
         }//end of switch statement
 
     }//end of onClick method
-
-    //Create method that allows user to logout of application
-    public void logout (View view){
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), Login.class));
-        finish();
-    }//End of logout method
 
 
 }//End of Main class

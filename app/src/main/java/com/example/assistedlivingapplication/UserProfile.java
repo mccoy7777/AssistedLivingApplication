@@ -171,7 +171,11 @@ public class UserProfile extends AppCompatActivity {
 
     }//end of OnCreate method
 
-
-
+    //Create method that allows user to logout of application
+    public void logout (View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
+    }//End of logout method
 
 }//end of UserProfile class
