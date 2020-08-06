@@ -2,17 +2,26 @@ package com.example.assistedlivingapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,40 +34,68 @@ public class MondayTasks extends AppCompatActivity {
     TextView mondayTasks;
 
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-    DocumentReference taskRef = fStore.collection("Tasks").document("My Tasks");
 
     CollectionReference allTasksRef = fStore.collection("Tasks");
+
+    TasksAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monday_tasks);
 
-        //Assign variables
-        mondayTasks = findViewById(R.id.tv_MondayTask);
+        FloatingActionButton btnAddTask = findViewById(R.id.btn_AddTask);
 
-
-        //Get tasks from database
-        allTasksRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        //Setup onClickListener
+        btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+            public void onClick(View view) {
+                startActivity(new Intent(MondayTasks.this, CreateNewDailyTask.class));
+            }
+        });
 
-                String data = "";
-                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                    Tasks tasks = documentSnapshot.toObject(Tasks.class);
-
-                    String name = tasks.getName();
-                    String description = tasks.getDescription();
-
-                    data += "Name : " + name + "\n Description : " + description + "\n\n";
-                }//end of for loop
-
-                mondayTasks.setText(data);
-            }//end of onSuccess method
-
-        });//end of onSuccess Listener
-
+        setUpRecyclerview();
 
     }//end of onCreate Method
 
+    private void setUpRecyclerview(){
+
+        Query query = allTasksRef.orderBy("time", Query.Direction.DESCENDING).
+                        whereArrayContains("tags", "Monday");
+
+        FirestoreRecyclerOptions<Tasks> options = new FirestoreRecyclerOptions.Builder<Tasks>()
+                .setQuery(query, Tasks.class)
+                .build();
+
+        adapter = new TasksAdapter(options);
+
+        RecyclerView recyclerView = findViewById(R.id.RecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    adapter.deleteTask(viewHolder.getAdapterPosition());
+            }
+        }).attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
 }//end of MondayTasks class

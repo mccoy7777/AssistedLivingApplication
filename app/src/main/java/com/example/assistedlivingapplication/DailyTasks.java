@@ -41,12 +41,6 @@ public class DailyTasks extends AppCompatActivity implements View.OnClickListene
 
     }//end of onCreate method
 
-    //Create method to move to Create New Task screen when button is clicked
-    public void createNewTask (View view){
-        startActivity(new Intent(getApplicationContext(), CreateNewDailyTask.class));
-        finish();
-    }//End of logout method
-
     @Override
     public void onClick(View view) {
 

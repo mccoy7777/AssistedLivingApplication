@@ -2,6 +2,7 @@ package com.example.assistedlivingapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,15 +33,9 @@ import java.util.Map;
 public class CreateNewDailyTask extends AppCompatActivity {
 
     //Declare variables
-    EditText taskName, description;
-    Button add;
-    Spinner spnDaysOfWeek;
+    EditText taskName, taskDescription, taskTime, taskDay;
+    Button addTask;
 
-    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-    CollectionReference allTasksRef = fStore.collection("Tasks");
-
-    private final String KEY_TASK_NAME = "task name";
-    private final String KEY_DESCRIPTION = "description";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,80 +43,51 @@ public class CreateNewDailyTask extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_daily_task);
 
         //Assign variables
-        spnDaysOfWeek = findViewById(R.id.spn_DaysOfTheWeek);
-
         taskName = findViewById(R.id.et_TaskName);
-        description = findViewById(R.id.et_Description);
+        taskDescription = findViewById(R.id.et_Description);
+        taskTime = findViewById(R.id.et_time);
+        taskDay = findViewById(R.id.et_TaskDay);
 
-        add = findViewById(R.id.btn_AddTask);
+        addTask = findViewById(R.id.btn_AddTask);
 
-        //Create new array list
-        List <String> daysOfTheWeek = new ArrayList<>();
-        daysOfTheWeek.add("- Choose the day of the week -");
-        daysOfTheWeek.add("Monday");
-        daysOfTheWeek.add("Tuesday");
-        daysOfTheWeek.add("Wednesday");
-        daysOfTheWeek.add("Thursday");
-        daysOfTheWeek.add("Friday");
-        daysOfTheWeek.add("Saturday");
-        daysOfTheWeek.add("Sunday");
 
-        //Setup array adapter
-        ArrayAdapter<String> daysOfTheWeekAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, daysOfTheWeek);
-        daysOfTheWeekAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnDaysOfWeek.setAdapter(daysOfTheWeekAdapter);
-
-        //Set up click listener for array adapter
-        spnDaysOfWeek.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String yourChoice = spnDaysOfWeek.getSelectedItem().toString();
-
-            }//end of onItemSelected method
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }//end of onNothingSelected
-
-        });//end of setOnItemSelectedListener method
-
-        //Set onClickListener for Save Button to save the new task to the database
-        add.setOnClickListener(new View.OnClickListener() {
+        addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Set variables and get the text from that the user inputs
-                 String addTaskName = taskName.getText().toString().trim();
-                 String addDescription = description.getText().toString().trim();
-
-                 //Create Tasks object
-                 Tasks tasks = new Tasks(addTaskName, addDescription);
-
-                 //Add tasks to firebase collections
-                allTasksRef.add(tasks).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(CreateNewDailyTask.this, "New Task Added", Toast.LENGTH_SHORT).show();
-                    }//end of onSuccess method
-
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(CreateNewDailyTask.this, "Error!" + e.toString(), Toast.LENGTH_SHORT).show();
-                    }//end of onFailure method
-
-                });//end of onSuccess Listener
-
-                //Use intent to switch back to DailyTasks screen
-                Intent i = new Intent(getApplicationContext(), DailyTasks.class );
-                startActivity(i);
-
+                saveTask();
             }//end of onClick method
 
-        });//end of OnClickListener
+        });//end of onClickListener
+
 
     }//end of onCreate Method
+
+    //Create method to save task
+    private void saveTask() {
+        String name = taskName.getText().toString();
+        String description = taskDescription.getText().toString();
+        String time = taskTime.getText().toString();
+        String tagInput = taskDay.getText().toString();
+        String[] tagArray = tagInput.split("\\s*, \\s*");
+        List<String> tags = Arrays.asList(tagArray);
+
+        if (name.trim().isEmpty() || description.trim().isEmpty() || time.trim().isEmpty()){
+            Toast.makeText(this, "Cannot leave field blank", Toast.LENGTH_SHORT).show();
+            return;
+        }//end of if statement
+
+        //Add it to the firebase database
+        CollectionReference tasksRef = FirebaseFirestore.getInstance()
+                .collection("Tasks");
+
+        Tasks tasks = new Tasks(name, description, time, tags);
+
+        tasksRef.add(tasks);
+
+        Toast.makeText(this, "Task Added", Toast.LENGTH_SHORT).show();
+        finish();
+
+    }//end of saveTask method
 
 
 }//end of CreateNewDailyTask class
