@@ -70,7 +70,6 @@ public class CreateNewDailyTask extends AppCompatActivity implements TimePickerD
             public void onClick(View view) {
                 DialogFragment timePicker = new TimePicker();
                 timePicker.show(getSupportFragmentManager(), "time picker");
-
             }//end of onClick method
 
         });//end of onClick Listener
