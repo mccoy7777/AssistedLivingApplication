@@ -3,7 +3,9 @@ package com.example.assistedlivingapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,16 +27,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CreateNewDailyTask extends AppCompatActivity {
+public class CreateNewDailyTask extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     //Declare variables
-    EditText taskName, taskDescription, taskTime, taskDay;
+    EditText taskName, taskDescription, taskDay;
+    TextView taskTime;
     Button addTask;
 
 
@@ -59,8 +65,23 @@ public class CreateNewDailyTask extends AppCompatActivity {
 
         });//end of onClickListener
 
+        taskTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment timePicker = new TimePicker();
+                timePicker.show(getSupportFragmentManager(), "time picker");
+
+            }//end of onClick method
+
+        });//end of onClick Listener
+
 
     }//end of onCreate Method
+
+    @Override
+    public void onTimeSet(android.widget.TimePicker timePicker, int i, int i1) {
+        taskTime.setText(i + ":" + i1);
+    }//end of onTimeSet method
 
     //Create method to save task
     private void saveTask() {
