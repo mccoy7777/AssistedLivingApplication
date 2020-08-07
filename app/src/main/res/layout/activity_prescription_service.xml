@@ -17,7 +17,7 @@
         android:background="@android:color/transparent"
         android:drawableRight="@drawable/plus_button"
         android:onClick="addNewPrescription"
-        android:text="Create New Prescription"
+        android:text="Add New Prescription"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
@@ -64,7 +64,6 @@
         android:id="@+id/divider4"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
         android:background="@color/lightgray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,8 +93,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_prescription"
         android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/divider3"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_CreateNewPrescription" />

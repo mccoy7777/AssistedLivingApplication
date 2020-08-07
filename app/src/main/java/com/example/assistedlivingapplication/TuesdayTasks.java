@@ -60,7 +60,8 @@ public class TuesdayTasks extends AppCompatActivity {
 
     private void setUpRecyclerview(){
 
-        Query query = allTasksRef.orderBy("time", Query.Direction.DESCENDING);
+        Query query = allTasksRef.orderBy("time", Query.Direction.DESCENDING)
+                .whereArrayContains("tags", "Tuesday");
 
         FirestoreRecyclerOptions<Tasks> options = new FirestoreRecyclerOptions.Builder<Tasks>()
                 .setQuery(query, Tasks.class)
